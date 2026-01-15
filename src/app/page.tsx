@@ -35,7 +35,7 @@ const navLinks = [
 ];
 
 const skills = [
-  "HTML5", "CSS3", "JavaScript", "ReactJS", "Python", "Node.js", 
+  "HTML5", "CSS3", "JavaScript", "ReactJS", "Python", "Node.js",
   "Git", "SQL", "AI & ML", "Bootstrap", "Express.js", "REST API", "DSA", "Open Source"
 ];
 
@@ -61,33 +61,33 @@ const openSourceProjects = [
 ];
 
 const projects = [
-  { 
-    name: "Evolving-Pointer", 
-    description: "Advanced data structure and pointer visualization tool", 
+  {
+    name: "Evolving-Pointer",
+    description: "Advanced data structure and pointer visualization tool",
     tags: ["DSA", "Visualization"],
     url: `https://${GITHUB_USERNAME.toLowerCase()}.github.io/Evolving-Pointer/`,
     github: `https://github.com/${GITHUB_USERNAME}/Evolving-Pointer`,
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/02253137-82ae-4624-a930-8d5ded9c6481/Screenshot-2026-01-15-at-7.03.46-PM-resized-1768484044102.webp?width=8000&height=8000&resize=contain"
   },
-  { 
-    name: "Royal-Enfield-v2", 
-    description: "Modern responsive bikes showcase with animations", 
+  {
+    name: "Royal-Enfield-v2",
+    description: "Modern responsive bikes showcase with animations",
     tags: ["HTML", "CSS", "JS"],
     url: "https://re-krlx.vercel.app/",
     github: `https://github.com/${GITHUB_USERNAME}/Royal-Enfield-v2`,
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/02253137-82ae-4624-a930-8d5ded9c6481/Screenshot-2026-01-15-at-7.19.41-PM-resized-1768485064164.webp?width=8000&height=8000&resize=contain"
   },
-  { 
-    name: "Porsche-premium-car-experience", 
-    description: "Premium Porsche car showcase experience", 
+  {
+    name: "Porsche-premium-car-experience",
+    description: "Premium Porsche car showcase experience",
     tags: ["HTML", "CSS", "JS"],
     url: `https://github.com/${GITHUB_USERNAME}/Porsche-premium-car-experience`,
     github: `https://github.com/${GITHUB_USERNAME}/Porsche-premium-car-experience`,
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/02253137-82ae-4624-a930-8d5ded9c6481/Screenshot-2026-01-15-at-7.19.56-PM-resized-1768485064168.webp?width=8000&height=8000&resize=contain"
   },
-  { 
-    name: "Wine-quality-predictor", 
-    description: "ML-based wine quality prediction app", 
+  {
+    name: "Wine-quality-predictor",
+    description: "ML-based wine quality prediction app",
     tags: ["Python", "ML"],
     url: "https://wine-quality-predictor-pi.vercel.app/",
     github: `https://github.com/${GITHUB_USERNAME}/Wine-quality-predictor-`,
@@ -96,7 +96,7 @@ const projects = [
 ];
 
 const openExternalUrl = (url: string) => {
-  window.parent.postMessage({ type: "OPEN_EXTERNAL_URL", data: { url } }, "*");
+  window.open(url, "_blank");
 };
 
 export default function Home() {
@@ -117,7 +117,7 @@ export default function Home() {
   return (
     <div ref={containerRef} className="min-h-screen bg-[#faf8f5] text-[#1a1a1a] overflow-x-hidden">
       <div className="fixed inset-0 noise pointer-events-none z-50" />
-      
+
       <nav className="fixed top-0 left-0 right-0 z-40 mix-blend-difference">
         <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
           <motion.a
@@ -188,7 +188,7 @@ export default function Home() {
                 <br />
                 <span className="text-stroke">SANGWAN</span>
               </h1>
-              
+
               <div className="mt-8 flex items-center gap-4">
                 <div className="h-px bg-[#1a1a1a] w-16" />
                 <motion.span
@@ -285,10 +285,10 @@ export default function Home() {
               <div className="inline-block px-4 py-2 bg-[#1a1a1a] text-white text-sm font-bold">
                 B.Tech CSE (AI & ML) @ Newton School of Technology, Pune
               </div>
-              
+
               <p className="text-xl leading-relaxed text-[#4a4a4a]">
-                Passionate web developer, open-source contributor, and competitive programmer. 
-                From Pilani, Rajasthan. I love creating beautiful, performant web experiences 
+                Passionate web developer, open-source contributor, and competitive programmer.
+                From Pilani, Rajasthan. I love creating beautiful, performant web experiences
                 and building solutions for real-world problems.
               </p>
 
@@ -307,7 +307,7 @@ export default function Home() {
                   </span>
                   <ArrowUpRight size={18} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
-                <button 
+                <button
                   onClick={() => openExternalUrl(`https://github.com/${GITHUB_USERNAME}`)}
                   className="flex items-center justify-between group py-3 border-b border-[#e5e0d8] w-full text-left"
                 >
@@ -481,8 +481,8 @@ export default function Home() {
                 >
                   <div className="aspect-[4/3] bg-[#1a1a1a] relative overflow-hidden">
                     {project.image ? (
-                      <img 
-                        src={project.image} 
+                      <img
+                        src={project.image}
                         alt={project.name}
                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
