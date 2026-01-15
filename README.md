@@ -83,7 +83,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
+Open [https://subham-sangwan-portfolio.vercel.app/] to view the portfolio.
 
 ---
 
