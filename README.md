@@ -123,9 +123,4 @@ Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 ---
 
 <div align="center">
-
-**Built with ❤️ by Subham Sangwan**
-
-⭐ Star this repo if you like it!
-
 </div>
