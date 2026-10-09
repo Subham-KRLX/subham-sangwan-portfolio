@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import type { FormEvent } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import {
   Github,
   Linkedin,
@@ -506,10 +507,12 @@ export default function Home() {
                 >
                   <div className="aspect-[4/3] bg-[#1a1a1a] relative overflow-hidden">
                     {project.image ? (
-                      <img
+                      <Image
                         src={project.image}
                         alt={project.name}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        fill
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
