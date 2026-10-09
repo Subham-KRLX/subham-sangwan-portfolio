@@ -6,7 +6,8 @@
         "dev": "next dev --turbopack",
         "build": "next build",
         "start": "next start",
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "check:links": "node scripts/check-links.mjs"
     },
     "dependencies": {
         "@babel/parser": "^7.28.5",
