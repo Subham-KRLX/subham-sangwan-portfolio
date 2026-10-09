@@ -2,9 +2,9 @@
 
 # Subham Sangwan — Portfolio
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-ff5c00?style=for-the-badge&logo=vercel&logoColor=white)](https://subham-sangwan-portfolio.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-ff5c00?style=for-the-badge&logo=vercel&logoColor=white)](https://subham-sangwan-portfolio-kappa.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-Subham--KRLX-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Subham-KRLX)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Subham%20Sangwan-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/subham-sangwan)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Subham%20Sangwan-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/subham-sangwan-592a0a316/)
 
 <br />
 
@@ -23,8 +23,10 @@
 - **Modern Design** — Clean, minimalist aesthetic with bold typography
 - **Smooth Animations** — Built with Framer Motion for delightful interactions
 - **Fully Responsive** — Optimized for all screen sizes
-- **Fast Performance** — Built with Next.js 15 and React 19
+- **Fast Performance** — Built with Next.js 16 and React 19
 - **Interactive Sections** — Skills marquee, animated cards, hover effects
+- **Accessible Navigation** — Semantic links, keyboard focus, and reduced-motion support
+- **Search Ready** — Open Graph metadata, canonical URL, robots file, and sitemap
 
 ---
 
@@ -59,7 +61,7 @@
 
 | Category | Technologies |
 |----------|-------------|
-| **Framework** | Next.js 15, React 19 |
+| **Framework** | Next.js 16, React 19 |
 | **Styling** | Tailwind CSS, shadcn/ui |
 | **Animations** | Framer Motion |
 | **Language** | TypeScript |
@@ -81,9 +83,15 @@ npm install
 
 # Run development server
 npm run dev
+
+# Check code quality
+npm run lint
+
+# Create a production build
+npm run build
 ```
 
-Open [https://subham-sangwan-portfolio.vercel.app/] to view the portfolio.
+Open [http://localhost:3000](http://localhost:3000) for local development or visit the [live portfolio](https://subham-sangwan-portfolio-kappa.vercel.app/).
 
 ---
 
@@ -94,7 +102,9 @@ Open [https://subham-sangwan-portfolio.vercel.app/] to view the portfolio.
 │   ├── app/
 │   │   ├── layout.tsx      # Root layout with fonts & metadata
 │   │   ├── page.tsx        # Main portfolio page
-│   │   └── globals.css     # Global styles & animations
+│   │   ├── globals.css     # Global styles & animations
+│   │   ├── robots.ts       # Search crawler rules
+│   │   └── sitemap.ts      # Search engine sitemap
 │   ├── components/
 │   │   └── ui/             # shadcn/ui components
 │   └── lib/
@@ -113,7 +123,7 @@ Open [https://subham-sangwan-portfolio.vercel.app/] to view the portfolio.
 |----------|------|
 | **Email** | [subhamsangwan26@gmail.com](mailto:subhamsangwan26@gmail.com) |
 | **GitHub** | [@Subham-KRLX](https://github.com/Subham-KRLX) |
-| **LinkedIn** | [Subham Sangwan](https://linkedin.com/in/subham-sangwan) |
+| **LinkedIn** | [Subham Sangwan](https://www.linkedin.com/in/subham-sangwan-592a0a316/) |
 | **Codeforces** | [KRLX](https://codeforces.com/profile/KRLX) |
 | **CodeChef** | [krlx](https://www.codechef.com/users/krlx) |
 | **LeetCode** | [KRLX2005](https://leetcode.com/u/KRLX2005/) |
