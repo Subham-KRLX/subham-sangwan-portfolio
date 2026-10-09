@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import type { FormEvent } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Github,
@@ -12,7 +13,6 @@ import {
   ArrowUpRight,
   Trophy,
   GitFork,
-  Star,
   Menu,
   X,
   Send,
@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 const GITHUB_USERNAME = "Subham-KRLX";
+const LINKEDIN_URL = "https://www.linkedin.com/in/subham-sangwan-592a0a316/";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -53,11 +54,11 @@ const heroButtons = [
 ];
 
 const openSourceProjects = [
-  { name: "sedona", repo: "Subham-KRLX/sedona", description: "Cluster computing framework for large-scale geospatial data", stars: 1, language: "Scala" },
-  { name: "vscode-cpptools", repo: "Subham-KRLX/vscode-cpptools", description: "C/C++ IntelliSense, debugging extension for VS Code", stars: 0, language: "TypeScript" },
-  { name: "site-build", repo: "openseadragon/site-build", description: "Build script and documents for OpenSeadragon", stars: 0, language: "JavaScript" },
-  { name: "MIEngine", repo: "Subham-KRLX/MIEngine", description: "Visual Studio MI Debug Engine", stars: 0, language: "C#" },
-  { name: "airflow", repo: "Subham-KRLX/airflow", description: "Apache Airflow - Platform for workflow automation", stars: 0, language: "Python" },
+  { name: "sedona", repo: "Subham-KRLX/sedona", description: "Cluster computing framework for large-scale geospatial data", language: "Scala" },
+  { name: "vscode-cpptools", repo: "Subham-KRLX/vscode-cpptools", description: "C/C++ IntelliSense and debugging extension for VS Code", language: "TypeScript" },
+  { name: "site-build", repo: "openseadragon/site-build", description: "Build tooling and documentation for OpenSeadragon", language: "JavaScript" },
+  { name: "MIEngine", repo: "Subham-KRLX/MIEngine", description: "Visual Studio MI Debug Engine", language: "C#" },
+  { name: "airflow", repo: "Subham-KRLX/airflow", description: "Apache Airflow workflow orchestration platform", language: "Python" },
 ];
 
 const projects = [
@@ -95,14 +96,10 @@ const projects = [
   },
 ];
 
-const openExternalUrl = (url: string) => {
-  window.open(url, "_blank");
-};
-
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentRole, setCurrentRole] = useState(0);
-  const roles = ["Web Developer", "CP Enthusiast", "Open Source Contributor"];
+  const roles = ["Product Manager Intern", "Full-Stack Developer", "Open Source Contributor"];
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
@@ -114,11 +111,25 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [roles.length]);
 
+  const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+    const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
+    const body = encodeURIComponent(
+      [`Hi Subham,`, "", message, "", `From: ${name}`, `Email: ${email}`].join("\n")
+    );
+
+    window.location.href = `mailto:subhamsangwan26@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   return (
     <div ref={containerRef} className="min-h-screen bg-[#faf8f5] text-[#1a1a1a] overflow-x-hidden">
       <div className="fixed inset-0 noise pointer-events-none z-50" />
 
-      <nav className="fixed top-0 left-0 right-0 z-40 mix-blend-difference">
+      <nav aria-label="Primary navigation" className="fixed top-0 left-0 right-0 z-40 mix-blend-difference">
         <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
           <motion.a
             href="#home"
@@ -144,7 +155,14 @@ export default function Home() {
             ))}
           </div>
 
-          <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button
+            type="button"
+            className="md:hidden text-white"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -154,6 +172,7 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
+          id="mobile-navigation"
           className="fixed inset-0 bg-[#1a1a1a] z-30 flex flex-col items-center justify-center gap-8"
         >
           {navLinks.map((link) => (
@@ -204,13 +223,15 @@ export default function Home() {
 
               <div className="mt-12 flex flex-wrap gap-3">
                 {heroButtons.map((platform) => (
-                  <button
+                  <a
                     key={platform.name}
-                    onClick={() => openExternalUrl(platform.url)}
+                    href={platform.url}
+                    target="_blank"
+                    rel="noreferrer"
                     className="px-5 py-2.5 border-2 border-[#1a1a1a] text-sm font-bold uppercase tracking-wider hover:bg-[#1a1a1a] hover:text-white transition-all"
                   >
                     {platform.name}
-                  </button>
+                  </a>
                 ))}
               </div>
 
@@ -300,15 +321,17 @@ export default function Home() {
                   </span>
                   <ArrowUpRight size={18} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
-                <a href="tel:8233373001" className="flex items-center justify-between group py-3 border-b border-[#e5e0d8]">
+                <a href="tel:+918233373001" className="flex items-center justify-between group py-3 border-b border-[#e5e0d8]">
                   <span className="flex items-center gap-3">
                     <Phone size={18} />
-                    8233373001
+                    +91 82333 73001
                   </span>
                   <ArrowUpRight size={18} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
-                <button
-                  onClick={() => openExternalUrl(`https://github.com/${GITHUB_USERNAME}`)}
+                <a
+                  href={`https://github.com/${GITHUB_USERNAME}`}
+                  target="_blank"
+                  rel="noreferrer"
                   className="flex items-center justify-between group py-3 border-b border-[#e5e0d8] w-full text-left"
                 >
                   <span className="flex items-center gap-3">
@@ -316,7 +339,7 @@ export default function Home() {
                     View My GitHub
                   </span>
                   <ArrowUpRight size={18} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>
@@ -376,9 +399,11 @@ export default function Home() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {cpPlatforms.map((platform, index) => (
-                <motion.button
+                <motion.a
                   key={platform.name}
-                  onClick={() => openExternalUrl(platform.url)}
+                  href={platform.url}
+                  target="_blank"
+                  rel="noreferrer"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -392,7 +417,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-2xl font-bold group-hover:text-white transition-colors">{platform.name}</h3>
                   <p className="text-sm text-[#6b6b6b] mt-2 group-hover:text-white/60 transition-colors">{platform.rank}</p>
-                </motion.button>
+                </motion.a>
               ))}
             </div>
           </motion.div>
@@ -414,9 +439,11 @@ export default function Home() {
 
             <div className="space-y-4">
               {openSourceProjects.map((project, index) => (
-                <motion.button
+                <motion.a
                   key={project.name}
-                  onClick={() => openExternalUrl(`https://github.com/${project.repo}`)}
+                  href={`https://github.com/${project.repo}`}
+                  target="_blank"
+                  rel="noreferrer"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -431,25 +458,24 @@ export default function Home() {
                     <p className="text-[#6b6b6b] mt-1">{project.description}</p>
                   </div>
                   <div className="flex items-center gap-6">
-                    <span className="flex items-center gap-2 text-sm">
-                      <Star size={14} /> {project.stars}
-                    </span>
                     <span className="px-3 py-1 bg-[#1a1a1a] text-white text-xs font-bold">
                       {project.language}
                     </span>
                   </div>
-                </motion.button>
+                </motion.a>
               ))}
             </div>
 
-            <motion.button
-              onClick={() => openExternalUrl(`https://github.com/${GITHUB_USERNAME}`)}
+            <motion.a
+              href={`https://github.com/${GITHUB_USERNAME}`}
+              target="_blank"
+              rel="noreferrer"
               whileHover={{ scale: 1.02 }}
               className="inline-flex items-center gap-3 mt-12 px-8 py-4 bg-[#1a1a1a] text-white font-bold uppercase tracking-wider"
             >
               See More on GitHub
               <ExternalLink size={18} />
-            </motion.button>
+            </motion.a>
           </motion.div>
         </div>
       </section>
@@ -476,8 +502,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -10 }}
-                  className="group cursor-pointer"
-                  onClick={() => openExternalUrl(project.url)}
+                  className="group"
                 >
                   <div className="aspect-[4/3] bg-[#1a1a1a] relative overflow-hidden">
                     {project.image ? (
@@ -497,20 +522,26 @@ export default function Home() {
                     <div className="absolute bottom-6 left-6 right-6">
                       <h3 className="text-2xl font-bold text-white">{project.name}</h3>
                     </div>
-                    <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`View ${project.name}`}
+                      className="absolute top-6 right-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
+                    >
                       <div className="w-12 h-12 bg-[#ff5c00] rounded-full flex items-center justify-center">
                         <ArrowUpRight className="text-white" size={24} />
                       </div>
-                    </div>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openExternalUrl(project.github);
-                      }}
-                      className="absolute top-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20"
+                    </a>
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`View ${project.name} source code on GitHub`}
+                      className="absolute top-6 left-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity w-12 h-12 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/60"
                     >
                       <Github className="text-white" size={20} />
-                    </button>
+                    </a>
                   </div>
                   <div className="mt-4">
                     <p className="text-[#6b6b6b]">{project.description}</p>
@@ -550,35 +581,45 @@ export default function Home() {
                 </p>
               </div>
 
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-6" onSubmit={handleContactSubmit}>
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="text-sm font-mono text-white/40 mb-2 block">YOUR NAME</label>
+                    <label htmlFor="contact-name" className="text-sm font-mono text-white/40 mb-2 block">YOUR NAME</label>
                     <Input
+                      id="contact-name"
+                      name="name"
+                      autoComplete="name"
+                      required
                       placeholder="John Doe"
                       className="bg-transparent border-white/20 border-2 h-14 text-white placeholder:text-white/30 focus:border-[#ff5c00]"
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-mono text-white/40 mb-2 block">YOUR EMAIL</label>
+                    <label htmlFor="contact-email" className="text-sm font-mono text-white/40 mb-2 block">YOUR EMAIL</label>
                     <Input
+                      id="contact-email"
+                      name="email"
                       type="email"
+                      autoComplete="email"
+                      required
                       placeholder="john@example.com"
                       className="bg-transparent border-white/20 border-2 h-14 text-white placeholder:text-white/30 focus:border-[#ff5c00]"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm font-mono text-white/40 mb-2 block">YOUR MESSAGE</label>
+                  <label htmlFor="contact-message" className="text-sm font-mono text-white/40 mb-2 block">YOUR MESSAGE</label>
                   <Textarea
+                    id="contact-message"
+                    name="message"
+                    required
                     placeholder="Tell me about your project..."
                     rows={6}
                     className="bg-transparent border-white/20 border-2 text-white placeholder:text-white/30 focus:border-[#ff5c00] resize-none"
                   />
                 </div>
                 <Button
-                  type="button"
-                  onClick={() => openExternalUrl(`mailto:subhamsangwan26@gmail.com`)}
+                  type="submit"
                   className="w-full h-14 bg-[#ff5c00] hover:bg-[#e55200] text-white font-bold uppercase tracking-wider"
                 >
                   <Send size={18} className="mr-2" />
@@ -593,21 +634,24 @@ export default function Home() {
       <footer className="py-12 px-6 md:px-12 border-t border-[#e5e0d8]">
         <div className="max-w-[1800px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-sm text-[#6b6b6b]">
-            © 2025 Subham Sangwan — Open Source
+            © {new Date().getFullYear()} Subham Sangwan — Open Source
           </p>
           <div className="flex items-center gap-4">
             {[
-              { icon: Github, url: `https://github.com/${GITHUB_USERNAME}` },
-              { icon: Linkedin, url: "https://linkedin.com/in/subham-sangwan" },
-              { icon: Mail, url: "mailto:subhamsangwan26@gmail.com" },
-            ].map(({ icon: Icon, url }) => (
-              <button
+              { icon: Github, url: `https://github.com/${GITHUB_USERNAME}`, label: "GitHub" },
+              { icon: Linkedin, url: LINKEDIN_URL, label: "LinkedIn" },
+              { icon: Mail, url: "mailto:subhamsangwan26@gmail.com", label: "Email" },
+            ].map(({ icon: Icon, url, label }) => (
+              <a
                 key={url}
-                onClick={() => url.startsWith("mailto:") ? window.location.href = url : openExternalUrl(url)}
+                href={url}
+                aria-label={label}
+                target={url.startsWith("http") ? "_blank" : undefined}
+                rel={url.startsWith("http") ? "noreferrer" : undefined}
                 className="w-12 h-12 border-2 border-[#1a1a1a] flex items-center justify-center hover:bg-[#1a1a1a] hover:text-white transition-all"
               >
                 <Icon size={18} />
-              </button>
+              </a>
             ))}
           </div>
         </div>
