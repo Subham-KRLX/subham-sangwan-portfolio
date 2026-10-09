@@ -194,16 +194,17 @@ export default function Home() {
         <div className="absolute bottom-20 left-12 w-[400px] h-[400px] bg-[#1a1a1a] opacity-10 blur-[120px] rounded-full" />
 
         <div className="flex-1 flex items-center px-6 md:px-12">
-          <div className="max-w-[1800px] mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-[1800px] min-w-0 mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
+              className="min-w-0 max-w-full"
             >
               <p className="text-sm font-mono text-[#6b6b6b] mb-4 tracking-widest uppercase">
                 Available for opportunities
               </p>
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold leading-[0.9] tracking-tight">
+              <h1 className="text-[2.5rem] sm:text-6xl md:text-8xl lg:text-9xl font-extrabold leading-[0.9] tracking-normal">
                 SUBHAM
                 <br />
                 <span className="text-stroke">SANGWAN</span>
@@ -222,14 +223,14 @@ export default function Home() {
                 </motion.span>
               </div>
 
-              <div className="mt-12 flex flex-wrap gap-3">
+              <div className="mt-12 grid grid-cols-2 sm:flex sm:flex-wrap gap-3 max-w-full">
                 {heroButtons.map((platform) => (
                   <a
                     key={platform.name}
                     href={platform.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="px-5 py-2.5 border-2 border-[#1a1a1a] text-sm font-bold uppercase tracking-wider hover:bg-[#1a1a1a] hover:text-white transition-all"
+                    className="px-3 sm:px-5 py-2.5 border-2 border-[#1a1a1a] text-center text-sm font-bold uppercase tracking-normal hover:bg-[#1a1a1a] hover:text-white transition-all last:col-span-2 sm:last:col-span-1"
                   >
                     {platform.name}
                   </a>
@@ -294,7 +295,7 @@ export default function Home() {
           >
             <div>
               <span className="text-sm font-mono text-[#ff5c00] tracking-widest">01 — ABOUT</span>
-              <h2 className="text-5xl md:text-7xl font-bold mt-4 leading-tight">
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 leading-tight">
                 BUILDING
                 <br />
                 <span className="text-stroke">DIGITAL</span>
@@ -356,7 +357,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <span className="text-sm font-mono text-[#ff5c00] tracking-widest">02 — SKILLS</span>
-            <h2 className="text-5xl md:text-7xl font-bold mt-4 mb-16">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 mb-16">
               TECH <span className="text-stroke" style={{ WebkitTextStroke: "2px white" }}>STACK</span>
             </h2>
 
@@ -391,7 +392,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <span className="text-sm font-mono text-[#ff5c00] tracking-widest">03 — COMPETITIVE PROGRAMMING</span>
-            <h2 className="text-5xl md:text-7xl font-bold mt-4 mb-8">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 mb-8">
               1000+ <span className="text-stroke">PROBLEMS</span>
             </h2>
             <p className="text-xl text-[#6b6b6b] mb-16 max-w-2xl">
@@ -434,7 +435,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <span className="text-sm font-mono text-[#ff5c00] tracking-widest">04 — OPEN SOURCE</span>
-            <h2 className="text-5xl md:text-7xl font-bold mt-4 mb-16">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 mb-16">
               CONTRIBUTIONS
             </h2>
 
@@ -490,7 +491,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <span className="text-sm font-mono text-[#ff5c00] tracking-widest">05 — PROJECTS</span>
-            <h2 className="text-5xl md:text-7xl font-bold mt-4 mb-16">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 mb-16">
               SELECTED <span className="text-stroke">WORK</span>
             </h2>
 
@@ -574,7 +575,7 @@ export default function Home() {
             <div className="grid lg:grid-cols-2 gap-16">
               <div>
                 <span className="text-sm font-mono text-[#ff5c00] tracking-widest">06 — CONTACT</span>
-                <h2 className="text-5xl md:text-7xl font-bold mt-4 leading-tight">
+                <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 leading-tight">
                   LET&apos;S WORK
                   <br />
                   <span className="text-stroke" style={{ WebkitTextStroke: "2px white" }}>TOGETHER</span>
