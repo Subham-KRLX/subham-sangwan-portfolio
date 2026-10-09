@@ -72,12 +72,13 @@ const projects = [
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/02253137-82ae-4624-a930-8d5ded9c6481/Screenshot-2026-01-15-at-7.03.46-PM-resized-1768484044102.webp?width=8000&height=8000&resize=contain"
   },
   {
-    name: "Royal-Enfield-v2",
-    description: "Modern responsive bikes showcase with animations",
-    tags: ["HTML", "CSS", "JS"],
-    url: "https://re-krlx.vercel.app/",
-    github: `https://github.com/${GITHUB_USERNAME}/Royal-Enfield-v2`,
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/02253137-82ae-4624-a930-8d5ded9c6481/Screenshot-2026-01-15-at-7.19.41-PM-resized-1768485064164.webp?width=8000&height=8000&resize=contain"
+    name: "Property Valuation Advisor",
+    description: "ML valuation with retrieval-grounded investment guidance and PDF reports",
+    tags: ["Python", "Random Forest", "RAG"],
+    url: "https://property-valuation-agentic-advisor-xvfy6pzq5caq72fmxlzrak.streamlit.app/",
+    github: `https://github.com/${GITHUB_USERNAME}/property-valuation-agentic-advisor`,
+    image: "/projects/property-valuation-architecture.png",
+    imageFit: "contain",
   },
   {
     name: "Porsche-premium-car-experience",
@@ -513,7 +514,7 @@ export default function Home() {
                         alt={project.name}
                         fill
                         sizes="(min-width: 768px) 50vw, 100vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className={`${project.imageFit === "contain" ? "object-contain p-5 sm:p-8 bg-[#f5f0e3]" : "object-cover"} group-hover:scale-105 transition-transform duration-500`}
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
