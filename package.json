@@ -7,6 +7,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint .",
+        "check:headers": "node scripts/check-security-headers.mjs",
         "check:links": "node scripts/check-links.mjs"
     },
     "dependencies": {

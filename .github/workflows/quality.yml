@@ -33,5 +33,8 @@ jobs:
       - name: Build production site
         run: npm run build
 
+      - name: Check security headers
+        run: npm run check:headers
+
       - name: Check external links
         run: npm run check:links
