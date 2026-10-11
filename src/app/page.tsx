@@ -75,7 +75,7 @@ const projects = [
     name: "Property Valuation Advisor",
     description: "ML valuation with retrieval-grounded investment guidance and PDF reports",
     tags: ["Python", "Random Forest", "RAG"],
-    url: "https://property-valuation-agentic-advisor-xvfy6pzq5caq72fmxlzrak.streamlit.app/",
+    url: "https://subham-property-advisor.streamlit.app/",
     github: `https://github.com/${GITHUB_USERNAME}/property-valuation-agentic-advisor`,
     image: "/projects/property-valuation-architecture.png",
     imageFit: "contain",
@@ -103,8 +103,46 @@ export default function Home() {
   const [currentRole, setCurrentRole] = useState(0);
   const roles = ["Product Manager Intern", "Full-Stack Developer", "Open Source Contributor"];
   const containerRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const menuButton = menuButtonRef.current;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const links = menuRef.current?.querySelectorAll<HTMLAnchorElement>("a[href]");
+    links?.[0]?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMobileMenuOpen(false);
+      }
+      if (event.key === "Tab" && links?.length) {
+        const controls = [menuButtonRef.current, ...Array.from(links)].filter(
+          (element): element is HTMLButtonElement | HTMLAnchorElement => element !== null
+        );
+        const index = controls.indexOf(document.activeElement as HTMLAnchorElement);
+        const next = event.shiftKey
+          ? (index - 1 + controls.length) % controls.length
+          : (index + 1) % controls.length;
+        event.preventDefault();
+        controls[next].focus();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    const media = window.matchMedia("(min-width: 768px)");
+    const closeOnDesktop = () => { if (media.matches) setMobileMenuOpen(false); };
+    media.addEventListener("change", closeOnDesktop);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      media.removeEventListener("change", closeOnDesktop);
+      menuButton?.focus();
+    };
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -158,6 +196,7 @@ export default function Home() {
           </div>
 
           <button
+            ref={menuButtonRef}
             type="button"
             className="md:hidden text-white"
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -175,6 +214,9 @@ export default function Home() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           id="mobile-navigation"
+          ref={menuRef}
+          role="navigation"
+          aria-label="Mobile navigation"
           className="fixed inset-0 bg-[#1a1a1a] z-30 flex flex-col items-center justify-center gap-8"
         >
           {navLinks.map((link) => (
@@ -205,7 +247,7 @@ export default function Home() {
               <p className="text-sm font-mono text-[#6b6b6b] mb-4 tracking-widest uppercase">
                 Available for opportunities
               </p>
-              <h1 className="text-[2.5rem] sm:text-6xl md:text-8xl lg:text-9xl font-extrabold leading-[0.9] tracking-normal">
+              <h1 className="text-[2rem] sm:text-6xl md:text-7xl lg:text-[3rem] xl:text-[3.75rem] 2xl:text-[4.5rem] font-extrabold leading-[1.05] tracking-normal">
                 SUBHAM
                 <br />
                 <span className="text-stroke">SANGWAN</span>
@@ -587,6 +629,7 @@ export default function Home() {
               </div>
 
               <form className="space-y-6" onSubmit={handleContactSubmit}>
+                <p className="text-sm text-white/70">Opens your email app with a draft. Send the email there to contact me.</p>
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="contact-name" className="text-sm font-mono text-white/40 mb-2 block">YOUR NAME</label>
@@ -628,7 +671,7 @@ export default function Home() {
                   className="w-full h-14 bg-[#ff5c00] hover:bg-[#e55200] text-white font-bold uppercase tracking-wider"
                 >
                   <Send size={18} className="mr-2" />
-                  Send Message
+                  Create Email Draft
                 </Button>
               </form>
             </div>

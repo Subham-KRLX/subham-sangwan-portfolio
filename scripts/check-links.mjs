@@ -7,7 +7,7 @@ const links = [
   ["LeetCode profile", "https://leetcode.com/u/KRLX2005/"],
   ["Evolving Pointer demo", "https://subham-krlx.github.io/Evolving-Pointer/"],
   ["Evolving Pointer source", "https://github.com/Subham-KRLX/Evolving-Pointer"],
-  ["Property Valuation Advisor health", "https://property-valuation-agentic-advisor-xvfy6pzq5caq72fmxlzrak.streamlit.app/healthz"],
+  ["Property Valuation Advisor health", "https://subham-property-advisor.streamlit.app/healthz"],
   ["Property Valuation Advisor source", "https://github.com/Subham-KRLX/property-valuation-agentic-advisor"],
   ["Porsche source", "https://github.com/Subham-KRLX/Porsche-premium-car-experience"],
   ["Wine Quality Predictor demo", "https://wine-quality-predictor-pi.vercel.app/"],
