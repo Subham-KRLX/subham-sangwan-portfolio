@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import type { FormEvent } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, MotionConfig, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import {
   Github,
@@ -99,6 +99,7 @@ const projects = [
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentRole, setCurrentRole] = useState(0);
+  const reduceMotion = useReducedMotion();
   const roles = ["Full-Stack Developer", "Open Source Contributor", "Product Manager Intern"];
   const containerRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -143,11 +144,12 @@ export default function Home() {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
+    if (reduceMotion) return;
     const interval = setInterval(() => {
       setCurrentRole((prev) => (prev + 1) % roles.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [roles.length]);
+  }, [roles.length, reduceMotion]);
 
   const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -164,7 +166,9 @@ export default function Home() {
   };
 
   return (
+    <MotionConfig reducedMotion="user">
     <div ref={containerRef} className="min-h-screen bg-[#faf8f5] text-[#1a1a1a] overflow-x-hidden">
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <div className="fixed inset-0 noise pointer-events-none z-50" />
 
       <nav aria-label="Primary navigation" className="fixed top-0 left-0 right-0 z-40 mix-blend-difference">
@@ -230,6 +234,7 @@ export default function Home() {
         </motion.div>
       )}
 
+      <main id="main-content" tabIndex={-1}>
       <section id="home" className="min-h-screen relative flex flex-col justify-between pt-32 pb-12">
         <div className="absolute top-20 right-12 w-[500px] h-[500px] bg-[#ff5c00] opacity-20 blur-[150px] rounded-full" />
         <div className="absolute bottom-20 left-12 w-[400px] h-[400px] bg-[#1a1a1a] opacity-10 blur-[120px] rounded-full" />
@@ -301,7 +306,7 @@ export default function Home() {
           </div>
         </div>
 
-        <motion.div style={{ y }} className="px-6 md:px-12">
+        <motion.div style={{ y: reduceMotion ? 0 : y }} className="px-6 md:px-12">
           <a href="#about" className="inline-flex items-center gap-4 group">
             <span className="text-sm font-mono tracking-wider">SCROLL TO EXPLORE</span>
             <ArrowDown size={16} className="group-hover:translate-y-1 transition-transform" />
@@ -312,7 +317,7 @@ export default function Home() {
       <section className="py-8 border-y border-[#e5e0d8] overflow-hidden">
         <div className="flex animate-marquee">
           {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex shrink-0">
+            <div key={i} aria-hidden={i === 1 ? true : undefined} className="flex shrink-0">
               {skills.map((skill) => (
                 <span key={`${i}-${skill}`} className="px-8 text-4xl md:text-6xl font-bold text-[#1a1a1a]/10 whitespace-nowrap">
                   {skill} <span className="text-[#ff5c00]">•</span>
@@ -575,7 +580,7 @@ export default function Home() {
                     <div className="absolute bottom-6 left-6 right-6">
                       <h3 className="text-xl sm:text-2xl font-bold text-white break-words">{project.name}</h3>
                     </div>
-                    <a
+                    {project.url !== project.github && <a
                       href={project.url}
                       target="_blank"
                       rel="noreferrer"
@@ -586,7 +591,7 @@ export default function Home() {
                       <div className="w-12 h-12 bg-[#ff5c00] rounded-full flex items-center justify-center">
                         <ArrowUpRight className="text-white" size={24} />
                       </div>
-                    </a>
+                    </a>}
                     <a
                       href={project.github}
                       target="_blank"
@@ -640,7 +645,7 @@ export default function Home() {
                 <p className="text-sm text-white/70">Opens your email app with a draft. Send the email there to contact me.</p>
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="contact-name" className="text-sm font-mono text-white/40 mb-2 block">YOUR NAME</label>
+                    <label htmlFor="contact-name" className="text-sm font-mono text-white/80 mb-2 block">YOUR NAME</label>
                     <Input
                       id="contact-name"
                       name="name"
@@ -651,7 +656,7 @@ export default function Home() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-email" className="text-sm font-mono text-white/40 mb-2 block">YOUR EMAIL</label>
+                    <label htmlFor="contact-email" className="text-sm font-mono text-white/80 mb-2 block">YOUR EMAIL</label>
                     <Input
                       id="contact-email"
                       name="email"
@@ -664,7 +669,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="contact-message" className="text-sm font-mono text-white/40 mb-2 block">YOUR MESSAGE</label>
+                  <label htmlFor="contact-message" className="text-sm font-mono text-white/80 mb-2 block">YOUR MESSAGE</label>
                   <Textarea
                     id="contact-message"
                     name="message"
@@ -687,6 +692,7 @@ export default function Home() {
         </div>
       </section>
 
+      </main>
       <footer className="py-12 px-6 md:px-12 border-t border-[#e5e0d8]">
         <div className="max-w-[1800px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-sm text-[#6b6b6b]">
@@ -713,5 +719,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    </MotionConfig>
   );
 }
