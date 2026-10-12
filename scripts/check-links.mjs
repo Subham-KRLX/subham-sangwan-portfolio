@@ -12,11 +12,9 @@ const links = [
   ["Porsche source", "https://github.com/Subham-KRLX/Porsche-premium-car-experience"],
   ["Wine Quality Predictor demo", "https://wine-quality-predictor-pi.vercel.app/"],
   ["Wine Quality Predictor source", "https://github.com/Subham-KRLX/Wine-quality-predictor-"],
-  ["Apache Sedona fork", "https://github.com/Subham-KRLX/sedona"],
-  ["VS Code C++ tools fork", "https://github.com/Subham-KRLX/vscode-cpptools"],
-  ["OpenSeadragon site build", "https://github.com/openseadragon/site-build"],
-  ["MIEngine fork", "https://github.com/Subham-KRLX/MIEngine"],
-  ["Apache Airflow fork", "https://github.com/Subham-KRLX/airflow"],
+  ["Airflow merged contribution", "https://github.com/apache/airflow/pull/68118"],
+  ["VS Code C++ merged contribution", "https://github.com/microsoft/vscode-cpptools/pull/14108"],
+  ["MIEngine merged contribution", "https://github.com/microsoft/MIEngine/pull/1529"],
 ];
 
 const browserProtectedHosts = new Set([

@@ -13,7 +13,7 @@ import {
   ExternalLink,
   ArrowUpRight,
   Trophy,
-  GitFork,
+  GitPullRequest,
   Menu,
   X,
   Send,
@@ -37,8 +37,8 @@ const navLinks = [
 ];
 
 const skills = [
-  "HTML5", "CSS3", "JavaScript", "ReactJS", "Python", "Node.js",
-  "Git", "SQL", "AI & ML", "Bootstrap", "Express.js", "REST API", "DSA", "Open Source"
+  "Python", "JavaScript", "TypeScript", "React", "Next.js", "FastAPI",
+  "Node.js", "Express.js", "PostgreSQL", "MongoDB", "Docker", "Streamlit", "Git", "Apache Airflow"
 ];
 
 const cpPlatforms = [
@@ -49,17 +49,15 @@ const cpPlatforms = [
 ];
 
 const heroButtons = [
-  { name: "Codeforces", url: "https://codeforces.com/profile/KRLX" },
-  { name: "CodeChef", url: "https://www.codechef.com/users/krlx" },
-  { name: "LeetCode", url: "https://leetcode.com/u/KRLX2005/" },
+  { name: "Projects", url: "#projects" },
+  { name: "Merged PRs", url: "#opensource" },
+  { name: "Contact", url: "#contact" },
 ];
 
 const openSourceProjects = [
-  { name: "sedona", repo: "Subham-KRLX/sedona", description: "Cluster computing framework for large-scale geospatial data", language: "Scala" },
-  { name: "vscode-cpptools", repo: "Subham-KRLX/vscode-cpptools", description: "C/C++ IntelliSense and debugging extension for VS Code", language: "TypeScript" },
-  { name: "site-build", repo: "openseadragon/site-build", description: "Build tooling and documentation for OpenSeadragon", language: "JavaScript" },
-  { name: "MIEngine", repo: "Subham-KRLX/MIEngine", description: "Visual Studio MI Debug Engine", language: "C#" },
-  { name: "airflow", repo: "Subham-KRLX/airflow", description: "Apache Airflow workflow orchestration platform", language: "Python" },
+  { name: "Apache Airflow", repo: "apache/airflow/pull/68118", number: 68118, description: "Added database lock timeouts and regression tests to address DAG processor hangs caused by lock contention.", language: "Python" },
+  { name: "Microsoft VS Code C/C++", repo: "microsoft/vscode-cpptools/pull/14108", number: 14108, description: "Added executable-name-based process attachment for selecting debugging targets.", language: "TypeScript" },
+  { name: "Microsoft MIEngine", repo: "microsoft/MIEngine/pull/1529", number: 1529, description: "Fixed long debugger argument truncation by increasing the pipe write buffer to 64 KB.", language: "C#" },
 ];
 
 const projects = [
@@ -73,25 +71,25 @@ const projects = [
   },
   {
     name: "Property Valuation Advisor",
-    description: "ML valuation with retrieval-grounded investment guidance and PDF reports",
-    tags: ["Python", "Random Forest", "RAG"],
+    description: "Estimates housing prices from 10 property features using Random Forest regression, with comparable-property matching and downloadable PDF reports.",
+    tags: ["Python", "Streamlit", "Random Forest"],
     url: "https://subham-property-advisor.streamlit.app/",
     github: `https://github.com/${GITHUB_USERNAME}/property-valuation-agentic-advisor`,
     image: "/projects/property-valuation-architecture.png",
     imageFit: "contain",
   },
   {
-    name: "Porsche-premium-car-experience",
-    description: "Premium Porsche car showcase experience",
+    name: "Porsche Premium Car Experience",
+    description: "Responsive vehicle showcase with interactive exploration and service-booking workflows.",
     tags: ["HTML", "CSS", "JS"],
     url: `https://github.com/${GITHUB_USERNAME}/Porsche-premium-car-experience`,
     github: `https://github.com/${GITHUB_USERNAME}/Porsche-premium-car-experience`,
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/02253137-82ae-4624-a930-8d5ded9c6481/Screenshot-2026-01-15-at-7.19.56-PM-resized-1768485064168.webp?width=8000&height=8000&resize=contain"
   },
   {
-    name: "Wine-quality-predictor",
-    description: "ML-based wine quality prediction app",
-    tags: ["Python", "ML"],
+    name: "Wine Quality Predictor",
+    description: "Predicts wine quality from 11 physicochemical features using Random Forest, with a FastAPI prediction service and React interface.",
+    tags: ["Python", "FastAPI", "React", "Docker"],
     url: "https://wine-quality-predictor-pi.vercel.app/",
     github: `https://github.com/${GITHUB_USERNAME}/Wine-quality-predictor-`,
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/02253137-82ae-4624-a930-8d5ded9c6481/Screenshot-2026-01-15-at-7.20.15-PM-resized-1768485064164.webp?width=8000&height=8000&resize=contain"
@@ -101,7 +99,7 @@ const projects = [
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentRole, setCurrentRole] = useState(0);
-  const roles = ["Product Manager Intern", "Full-Stack Developer", "Open Source Contributor"];
+  const roles = ["Full-Stack Developer", "Open Source Contributor", "Product Manager Intern"];
   const containerRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -245,9 +243,9 @@ export default function Home() {
               className="min-w-0 max-w-full"
             >
               <p className="text-sm font-mono text-[#6b6b6b] mb-4 tracking-widest uppercase">
-                Available for opportunities
+                Open to software and AI/ML internships
               </p>
-              <h1 className="text-[2rem] sm:text-6xl md:text-7xl lg:text-[3rem] xl:text-[3.75rem] 2xl:text-[4.5rem] font-extrabold leading-[1.05] tracking-normal">
+              <h1 className="text-2xl min-[375px]:text-[2rem] sm:text-6xl md:text-7xl lg:text-[3rem] xl:text-[3.75rem] 2xl:text-[4.5rem] font-extrabold leading-[1.05] tracking-normal">
                 SUBHAM
                 <br />
                 <span className="text-stroke">SANGWAN</span>
@@ -271,8 +269,6 @@ export default function Home() {
                   <a
                     key={platform.name}
                     href={platform.url}
-                    target="_blank"
-                    rel="noreferrer"
                     className="px-3 sm:px-5 py-2.5 border-2 border-[#1a1a1a] text-center text-sm font-bold uppercase tracking-normal hover:bg-[#1a1a1a] hover:text-white transition-all last:col-span-2 sm:last:col-span-1"
                   >
                     {platform.name}
@@ -349,14 +345,23 @@ export default function Home() {
 
             <div className="space-y-8">
               <div className="inline-block px-4 py-2 bg-[#1a1a1a] text-white text-sm font-bold">
-                B.Tech CSE (AI & ML) @ Newton School of Technology, Pune
+                AI & ML undergraduate @ Newton School of Technology, Pune
               </div>
 
               <p className="text-xl leading-relaxed text-[#4a4a4a]">
-                Passionate web developer, open-source contributor, and competitive programmer.
-                From Pilani, Rajasthan. I love creating beautiful, performant web experiences
-                and building solutions for real-world problems.
+                I build full-stack applications and deploy machine learning projects using
+                Python, FastAPI and React. My merged contributions to Apache Airflow and
+                Microsoft developer tools cover debugging features, reliability fixes and regression tests.
               </p>
+
+              <div className="border-t border-[#e5e0d8] pt-6">
+                <h3 className="text-lg font-bold">Product Manager Intern · Tribore AI</h3>
+                <p className="mt-1 text-sm text-[#6b6b6b]">May 2026 - Present · Remote</p>
+                <p className="mt-3 leading-relaxed text-[#4a4a4a]">
+                  Defined workflow requirements for credit risk assessment, underwriting and
+                  monitoring automation, translating product flows into API and interface requirements.
+                </p>
+              </div>
 
               <div className="grid gap-4 pt-6 border-t border-[#e5e0d8]">
                 <a href="mailto:subhamsangwan26@gmail.com" className="flex items-center justify-between group py-3 border-b border-[#e5e0d8]">
@@ -478,8 +483,8 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <span className="text-sm font-mono text-[#ff5c00] tracking-widest">04 — OPEN SOURCE</span>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 mb-16">
-              CONTRIBUTIONS
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mt-4 mb-16 break-words">
+              MERGED PRS
             </h2>
 
             <div className="space-y-4">
@@ -497,12 +502,13 @@ export default function Home() {
                 >
                   <div className="flex-1">
                     <h3 className="text-xl font-bold flex items-center gap-3">
-                      <GitFork size={18} className="text-[#ff5c00]" />
+                      <GitPullRequest size={18} className="text-[#ff5c00] shrink-0" />
                       {project.name}
                     </h3>
                     <p className="text-[#6b6b6b] mt-1">{project.description}</p>
                   </div>
                   <div className="flex items-center gap-6">
+                    <span className="text-sm font-medium">Merged #{project.number}</span>
                     <span className="px-3 py-1 bg-[#1a1a1a] text-white text-xs font-bold">
                       {project.language}
                     </span>
@@ -567,14 +573,15 @@ export default function Home() {
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="text-2xl font-bold text-white">{project.name}</h3>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white break-words">{project.name}</h3>
                     </div>
                     <a
                       href={project.url}
                       target="_blank"
                       rel="noreferrer"
-                      aria-label={`View ${project.name}`}
-                      className="absolute top-6 right-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
+                      aria-label={project.url === project.github ? `View ${project.name} repository` : `Open ${project.name} live demo`}
+                      title={project.url === project.github ? "View repository" : "Open live demo"}
+                      className="absolute top-6 right-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white rounded-full"
                     >
                       <div className="w-12 h-12 bg-[#ff5c00] rounded-full flex items-center justify-center">
                         <ArrowUpRight className="text-white" size={24} />
@@ -585,14 +592,15 @@ export default function Home() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`View ${project.name} source code on GitHub`}
-                      className="absolute top-6 left-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity w-12 h-12 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/60"
+                      title="View source code"
+                      className="absolute top-6 left-6 w-12 h-12 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                     >
                       <Github className="text-white" size={20} />
                     </a>
                   </div>
                   <div className="mt-4">
                     <p className="text-[#6b6b6b]">{project.description}</p>
-                    <div className="flex gap-2 mt-3">
+                    <div className="flex flex-wrap gap-2 mt-3">
                       {project.tags.map((tag) => (
                         <span key={tag} className="px-3 py-1 border border-[#e5e0d8] text-xs font-medium">
                           {tag}
