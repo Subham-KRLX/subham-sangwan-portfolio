@@ -63,6 +63,7 @@ const openSourceProjects = [
 const projects = [
   {
     name: "Evolving-Pointer",
+    category: "Web",
     description: "Advanced data structure and pointer visualization tool",
     tags: ["DSA", "Visualization"],
     url: `https://${GITHUB_USERNAME.toLowerCase()}.github.io/Evolving-Pointer/`,
@@ -71,6 +72,7 @@ const projects = [
   },
   {
     name: "Property Valuation Advisor",
+    category: "AI / ML",
     description: "Estimates housing prices from 10 property features using Random Forest regression, with comparable-property matching and downloadable PDF reports.",
     tags: ["Python", "Streamlit", "Random Forest"],
     url: "https://subham-property-advisor.streamlit.app/",
@@ -80,6 +82,7 @@ const projects = [
   },
   {
     name: "Porsche Premium Car Experience",
+    category: "Web",
     description: "Responsive vehicle showcase with interactive exploration and service-booking workflows.",
     tags: ["HTML", "CSS", "JS"],
     url: `https://github.com/${GITHUB_USERNAME}/Porsche-premium-car-experience`,
@@ -88,6 +91,7 @@ const projects = [
   },
   {
     name: "Wine Quality Predictor",
+    category: "AI / ML",
     description: "Predicts wine quality from 11 physicochemical features using Random Forest, with a FastAPI prediction service and React interface.",
     tags: ["Python", "FastAPI", "React", "Docker"],
     url: "https://wine-quality-predictor-pi.vercel.app/",
@@ -99,6 +103,8 @@ const projects = [
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentRole, setCurrentRole] = useState(0);
+  const [projectFilter, setProjectFilter] = useState("All");
+  const visibleProjects = projects.filter(project => projectFilter === "All" || project.category === projectFilter);
   const reduceMotion = useReducedMotion();
   const roles = ["Full-Stack Developer", "Open Source Contributor", "Product Manager Intern"];
   const containerRef = useRef<HTMLDivElement>(null);
@@ -132,7 +138,7 @@ export default function Home() {
       }
     };
     document.addEventListener("keydown", handleKeyDown);
-    const media = window.matchMedia("(min-width: 768px)");
+    const media = window.matchMedia("(min-width: 1024px)");
     const closeOnDesktop = () => { if (media.matches) setMobileMenuOpen(false); };
     media.addEventListener("change", closeOnDesktop);
     return () => {
@@ -153,6 +159,10 @@ export default function Home() {
 
   const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    for (const field of event.currentTarget.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input, textarea")) {
+      field.setCustomValidity(field.value.trim() ? "" : "Please enter more than spaces.");
+      if (!field.reportValidity()) return;
+    }
     const formData = new FormData(event.currentTarget);
     const name = String(formData.get("name") || "").trim();
     const email = String(formData.get("email") || "").trim();
@@ -182,7 +192,7 @@ export default function Home() {
             SS.
           </motion.a>
 
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-10">
             {navLinks.map((link, i) => (
               <motion.a
                 key={link.name}
@@ -200,7 +210,7 @@ export default function Home() {
           <button
             ref={menuButtonRef}
             type="button"
-            className="md:hidden text-white"
+            className="lg:hidden text-white"
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation"
@@ -545,12 +555,29 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <span className="text-sm font-mono text-[#ff5c00] tracking-widest">05 — PROJECTS</span>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 mb-16">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 mb-8">
               SELECTED <span className="text-stroke">WORK</span>
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {projects.map((project, index) => (
+            <div role="group" aria-label="Filter projects" className="flex flex-wrap gap-2 mb-8">
+              {["All", "AI / ML", "Web"].map(filter => (
+                <button
+                  key={filter}
+                  type="button"
+                  aria-pressed={projectFilter === filter}
+                  aria-controls="project-grid"
+                  onClick={() => setProjectFilter(filter)}
+                  className={`min-h-11 px-5 py-2 border-2 border-[#1a1a1a] text-sm font-bold transition-colors ${projectFilter === filter ? "bg-[#1a1a1a] text-white" : "hover:bg-[#e5e0d8]"}`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+            <p role="status" className="text-sm text-[#6b6b6b] mb-6">
+              {visibleProjects.length} projects{projectFilter === "All" ? "" : ` in ${projectFilter}`}
+            </p>
+            <div id="project-grid" className="grid md:grid-cols-2 gap-8">
+              {visibleProjects.map((project, index) => (
                 <motion.div
                   key={project.name}
                   initial={{ opacity: 0, y: 30 }}
@@ -641,7 +668,10 @@ export default function Home() {
                 </p>
               </div>
 
-              <form className="space-y-6" onSubmit={handleContactSubmit}>
+              <form className="space-y-6" onSubmit={handleContactSubmit} onInput={event => {
+                const field = event.target;
+                if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) field.setCustomValidity("");
+              }}>
                 <p className="text-sm text-white/70">Opens your email app with a draft. Send the email there to contact me.</p>
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
@@ -650,6 +680,7 @@ export default function Home() {
                       id="contact-name"
                       name="name"
                       autoComplete="name"
+                      maxLength={120}
                       required
                       placeholder="John Doe"
                       className="bg-transparent border-white/20 border-2 h-14 text-white placeholder:text-white/30 focus:border-[#ff5c00]"
@@ -662,6 +693,7 @@ export default function Home() {
                       name="email"
                       type="email"
                       autoComplete="email"
+                      maxLength={254}
                       required
                       placeholder="john@example.com"
                       className="bg-transparent border-white/20 border-2 h-14 text-white placeholder:text-white/30 focus:border-[#ff5c00]"
@@ -673,6 +705,7 @@ export default function Home() {
                   <Textarea
                     id="contact-message"
                     name="message"
+                    maxLength={4000}
                     required
                     placeholder="Tell me about your project..."
                     rows={6}
