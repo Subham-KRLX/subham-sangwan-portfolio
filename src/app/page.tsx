@@ -18,6 +18,7 @@ import {
   X,
   Send,
   ArrowDown,
+  Copy,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,6 +26,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const GITHUB_USERNAME = "Subham-KRLX";
 const LINKEDIN_URL = "https://www.linkedin.com/in/subham-sangwan-592a0a316/";
+const CONTACT_EMAIL = "subhamsangwan26@gmail.com";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -104,6 +106,8 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentRole, setCurrentRole] = useState(0);
   const [projectFilter, setProjectFilter] = useState("All");
+  const [contactFeedback, setContactFeedback] = useState("");
+  const [copyPending, setCopyPending] = useState(false);
   const visibleProjects = projects.filter(project => projectFilter === "All" || project.category === projectFilter);
   const reduceMotion = useReducedMotion();
   const roles = ["Full-Stack Developer", "Open Source Contributor", "Product Manager Intern"];
@@ -157,6 +161,19 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [roles.length, reduceMotion]);
 
+  const handleCopyEmail = async () => {
+    setCopyPending(true);
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      setContactFeedback("Email address copied.");
+    } catch {
+      setContactFeedback("Copy unavailable. You can select the email address above and copy it manually.");
+    } finally {
+      setCopyPending(false);
+    }
+  };
+
   const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     for (const field of event.currentTarget.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input, textarea")) {
@@ -172,7 +189,8 @@ export default function Home() {
       [`Hi Subham,`, "", message, "", `From: ${name}`, `Email: ${email}`].join("\n")
     );
 
-    window.location.href = `mailto:subhamsangwan26@gmail.com?subject=${subject}&body=${body}`;
+    setContactFeedback("Email app requested. Your message has not been sent by this website.");
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -379,7 +397,7 @@ export default function Home() {
               </div>
 
               <div className="grid gap-4 pt-6 border-t border-[#e5e0d8]">
-                <a href="mailto:subhamsangwan26@gmail.com" className="flex items-center justify-between group py-3 border-b border-[#e5e0d8]">
+                <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center justify-between group py-3 border-b border-[#e5e0d8]">
                   <span className="flex items-center gap-3">
                     <Mail size={18} />
                     subhamsangwan26@gmail.com
@@ -666,6 +684,24 @@ export default function Home() {
                 <p className="text-xl text-white/60 mt-8 max-w-md">
                   Have a project in mind? Let&apos;s create something amazing together.
                 </p>
+                <div className="mt-8 flex items-center gap-3 max-w-full">
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="min-w-0 break-all font-mono text-sm text-white/90 hover:text-[#ff5c00] transition-colors">
+                    {CONTACT_EMAIL}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    disabled={copyPending}
+                    aria-label="Copy email address"
+                    title="Copy email address"
+                    className="h-11 w-11 shrink-0 border border-white/40 flex items-center justify-center hover:bg-white hover:text-[#1a1a1a] disabled:opacity-50 transition-colors"
+                  >
+                    <Copy size={18} aria-hidden="true" />
+                  </button>
+                </div>
+                <p role="status" aria-live="polite" aria-atomic="true" className="mt-3 min-h-12 max-w-md text-sm text-white/80">
+                  {contactFeedback}
+                </p>
               </div>
 
               <form className="space-y-6" onSubmit={handleContactSubmit} onInput={event => {
@@ -735,7 +771,7 @@ export default function Home() {
             {[
               { icon: Github, url: `https://github.com/${GITHUB_USERNAME}`, label: "GitHub" },
               { icon: Linkedin, url: LINKEDIN_URL, label: "LinkedIn" },
-              { icon: Mail, url: "mailto:subhamsangwan26@gmail.com", label: "Email" },
+              { icon: Mail, url: `mailto:${CONTACT_EMAIL}`, label: "Email" },
             ].map(({ icon: Icon, url, label }) => (
               <a
                 key={url}
