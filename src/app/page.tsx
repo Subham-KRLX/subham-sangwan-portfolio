@@ -83,9 +83,9 @@ const projects = [
   {
     name: "Porsche Premium Car Experience",
     category: "Web",
-    description: "Responsive vehicle showcase with interactive exploration and service-booking workflows.",
-    tags: ["HTML", "CSS", "JS"],
-    url: `https://github.com/${GITHUB_USERNAME}/Porsche-premium-car-experience`,
+    description: "Next.js vehicle showcase with animated model galleries, responsive navigation, and a validated test-drive request preview.",
+    tags: ["Next.js", "TypeScript", "GSAP"],
+    url: "https://porsche-premium-car-experience-three.vercel.app/",
     github: `https://github.com/${GITHUB_USERNAME}/Porsche-premium-car-experience`,
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/02253137-82ae-4624-a930-8d5ded9c6481/Screenshot-2026-01-15-at-7.19.56-PM-resized-1768485064168.webp?width=8000&height=8000&resize=contain"
   },
