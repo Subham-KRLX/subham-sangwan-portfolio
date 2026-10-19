@@ -1,3 +1,5 @@
+import { pathToFileURL } from "node:url";
+
 const links = [
   ["Portfolio", "https://subham-sangwan-portfolio-kappa.vercel.app/"],
   ["GitHub profile", "https://github.com/Subham-KRLX"],
@@ -24,12 +26,15 @@ const browserProtectedHosts = new Set([
   "www.linkedin.com",
 ]);
 
-async function checkLink([name, url]) {
+export async function checkLink(
+  [name, url],
+  { fetchImpl = fetch, timeoutMs = 15_000 } = {},
+) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15_000);
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
-    const response = await fetch(url, {
+    const response = await fetchImpl(url, {
       headers: { "user-agent": "Mozilla/5.0 PortfolioLinkCheck/1.0" },
       redirect: "follow",
       signal: controller.signal,
@@ -42,19 +47,38 @@ async function checkLink([name, url]) {
       throw new Error(`HTTP ${response.status}`);
     }
 
-    const status = protectedResponse ? `${response.status} (browser protected)` : response.status;
-    console.log(`PASS  ${status}  ${name}`);
-    return true;
+    return {
+      name,
+      status: protectedResponse ? "unverified" : "passed",
+      httpStatus: response.status,
+    };
   } catch (error) {
-    console.error(`FAIL  ${name}: ${error.message}`);
-    return false;
+    return {
+      name,
+      status: "failed",
+      error: controller.signal.aborted ? "Timed out" : error.message,
+    };
   } finally {
     clearTimeout(timeout);
   }
 }
 
-const results = await Promise.all(links.map(checkLink));
-const failures = results.filter((result) => !result).length;
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const results = await Promise.all(links.map((link) => checkLink(link)));
+  const failures = results.filter((result) => result.status === "failed").length;
+  const unverified = results.filter((result) => result.status === "unverified").length;
+  const passed = results.length - failures - unverified;
 
-console.log(`\nChecked ${links.length} external links: ${links.length - failures} passed, ${failures} failed.`);
-if (failures > 0) process.exitCode = 1;
+  for (const result of results) {
+    if (result.status === "failed") {
+      console.error(`FAIL  ${result.name}: ${result.error}`);
+    } else if (result.status === "unverified") {
+      console.warn(`UNVERIFIED  ${result.httpStatus}  ${result.name} (browser check required)`);
+    } else {
+      console.log(`PASS  ${result.httpStatus}  ${result.name}`);
+    }
+  }
+
+  console.log(`\nChecked ${links.length} external links: ${passed} passed, ${unverified} unverified, ${failures} failed.`);
+  if (failures > 0) process.exitCode = 1;
+}
