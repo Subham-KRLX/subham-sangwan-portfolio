@@ -30,7 +30,7 @@ jobs:
       - name: Lint source
         run: npm run lint
 
-      - name: Test link checker
+      - name: Run regression tests
         run: npm test
 
       - name: Build production site

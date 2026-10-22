@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ErrorReporter from "@/components/ErrorReporter";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://subham-sangwan-portfolio-kappa.vercel.app"),
@@ -50,7 +49,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="antialiased">
-        <ErrorReporter />
         {children}
       </body>
     </html>

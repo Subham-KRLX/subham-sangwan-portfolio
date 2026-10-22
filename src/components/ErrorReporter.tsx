@@ -3,24 +3,17 @@
 import { useEffect } from "react";
 
 type ReporterProps = {
-  /*  ⎯⎯ props are only provided on the global-error page ⎯⎯ */
-  error?: Error & { digest?: string };
-  reset?: () => void;
+  error: Error & { digest?: string };
+  reset: () => void;
 };
 
 export default function ErrorReporter({ error, reset }: ReporterProps) {
   useEffect(() => {
-    if (error) {
-      console.error("Global error caught:", error);
-    }
+    console.error("Global error caught:", error);
   }, [error]);
 
-  /* ─ ordinary pages render nothing ─ */
-  if (!error) return null;
-
-  /* ─ global-error UI ─ */
   return (
-    <html>
+    <html lang="en">
       <body className="min-h-screen bg-background text-foreground flex items-center justify-center p-4">
         <div className="max-w-md w-full text-center space-y-6">
           <div className="space-y-2">
@@ -39,21 +32,14 @@ export default function ErrorReporter({ error, reset }: ReporterProps) {
                 </summary>
                 <pre className="mt-2 text-xs bg-muted p-2 rounded overflow-auto">
                   {error.message}
-                  {error.stack && (
-                    <div className="mt-2 text-muted-foreground">
-                      {error.stack}
-                    </div>
-                  )}
-                  {error.digest && (
-                    <div className="mt-2 text-muted-foreground">
-                      Digest: {error.digest}
-                    </div>
-                  )}
+                  {error.stack ? `\n\n${error.stack}` : ""}
+                  {error.digest ? `\n\nDigest: ${error.digest}` : ""}
                 </pre>
               </details>
             )}
             <button
-              onClick={() => reset?.()}
+              type="button"
+              onClick={reset}
               className="bg-primary text-primary-foreground px-4 py-2 rounded"
             >
               Try again
