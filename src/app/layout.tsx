@@ -1,5 +1,19 @@
 import type { Metadata } from "next";
+import { Space_Mono, Syne } from "next/font/google";
 import "./globals.css";
+
+const syne = Syne({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-syne",
+});
+
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-space-mono",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://subham-sangwan-portfolio-kappa.vercel.app"),
@@ -47,7 +61,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`${syne.variable} ${spaceMono.variable} scroll-smooth`}>
       <body className="antialiased">
         {children}
       </body>
