@@ -85,7 +85,7 @@ const projects = [
   {
     name: "Porsche Premium Car Experience",
     category: "Web",
-    description: "Next.js vehicle showcase with animated model galleries, responsive navigation, and a validated test-drive request preview.",
+    description: "Next.js vehicle showcase with a 911 configurator for paint, wheels and trim, a configuration summary, and My Garage builds saved on the same device.",
     tags: ["Next.js", "TypeScript", "GSAP"],
     url: "https://porsche-premium-car-experience-three.vercel.app/",
     github: `https://github.com/${GITHUB_USERNAME}/Porsche-premium-car-experience`,
