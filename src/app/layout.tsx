@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     siteName: "Subham Sangwan Portfolio",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Subham Sangwan | Product and Full-Stack Developer",
     description:
       "Product management, full-stack development, and open-source work by Subham Sangwan.",
