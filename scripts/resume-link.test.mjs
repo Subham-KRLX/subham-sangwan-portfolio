@@ -24,6 +24,7 @@ runInNewContext(outputText, { module: compiled, exports: compiled.exports, requi
 const markup = renderToStaticMarkup(createElement(compiled.exports.default));
 
 test("the resume opens a local PDF in a protected new tab", () => {
+  assert.match(markup, /View Resume/);
   assert.match(markup, /target="_blank"/);
   assert.match(markup, /rel="noopener noreferrer"/);
   assert.match(markup, /aria-label="View resume \(PDF, opens in a new tab\)"/);
