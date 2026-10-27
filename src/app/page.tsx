@@ -23,6 +23,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import ResumeLink from "@/components/ResumeLink";
 
 const GITHUB_USERNAME = "Subham-KRLX";
 const LINKEDIN_URL = "https://www.linkedin.com/in/subham-sangwan-592a0a316/";
@@ -302,11 +303,12 @@ export default function Home() {
                   <a
                     key={platform.name}
                     href={platform.url}
-                    className="px-3 sm:px-5 py-2.5 border-2 border-[#1a1a1a] text-center text-sm font-bold uppercase tracking-normal hover:bg-[#1a1a1a] hover:text-white transition-all last:col-span-2 sm:last:col-span-1"
+                    className="px-3 sm:px-5 py-2.5 border-2 border-[#1a1a1a] text-center text-sm font-bold uppercase tracking-normal hover:bg-[#1a1a1a] hover:text-white transition-all"
                   >
                     {platform.name}
                   </a>
                 ))}
+                <ResumeLink />
               </div>
 
               <div className="mt-8 flex items-center gap-2 text-[#6b6b6b]">
