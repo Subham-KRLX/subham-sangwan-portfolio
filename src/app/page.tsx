@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import type { FormEvent } from "react";
 import { motion, MotionConfig, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Github,
   Linkedin,
@@ -94,6 +95,7 @@ const projects = [
   },
   {
     name: "Wine Quality Predictor",
+    caseStudy: "/projects/wine-quality-predictor",
     category: "AI / ML",
     description: "Predicts wine quality from 11 physicochemical features using Random Forest, with a FastAPI prediction service and React interface.",
     tags: ["Python", "FastAPI", "React", "Docker"],
@@ -652,6 +654,11 @@ export default function Home() {
                   </div>
                   <div className="mt-4">
                     <p className="text-[#6b6b6b]">{project.description}</p>
+                    {project.caseStudy && (
+                      <Link href={project.caseStudy} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-bold underline underline-offset-4">
+                        View case study <ArrowUpRight size={16} aria-hidden="true" />
+                      </Link>
+                    )}
                     <div className="flex flex-wrap gap-2 mt-3">
                       {project.tags.map((tag) => (
                         <span key={tag} className="px-3 py-1 border border-[#e5e0d8] text-xs font-medium">

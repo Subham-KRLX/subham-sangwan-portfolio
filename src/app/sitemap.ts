@@ -8,5 +8,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: "https://subham-sangwan-portfolio-kappa.vercel.app/projects/wine-quality-predictor",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 }
