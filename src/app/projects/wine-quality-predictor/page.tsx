@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function WineCaseStudy() {
   return (
-    <div className="min-h-screen bg-background text-[#1a1a1a]">
+    <div className="min-h-screen bg-[#faf8f5] text-[#1a1a1a]">
       <a href="#case-study" className="skip-link">Skip to case study</a>
       <header className="border-b border-[#e5e0d8]">
         <nav aria-label="Case study navigation" className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-6">

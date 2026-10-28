@@ -45,23 +45,23 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #ffffff;
+  --background: #faf8f5;
   --foreground: #1a1a1a;
   --card: #ffffff;
   --card-foreground: #1a1a1a;
   --popover: #ffffff;
   --popover-foreground: #1a1a1a;
-  --primary: #c2410c;
+  --primary: #ff5c00;
   --primary-foreground: #ffffff;
-  --secondary: #f3f4f6;
+  --secondary: #f0ebe3;
   --secondary-foreground: #1a1a1a;
-  --muted: #f3f4f6;
+  --muted: #f0ebe3;
   --muted-foreground: #6b6b6b;
   --accent: #1a1a1a;
-  --accent-foreground: #ffffff;
+  --accent-foreground: #faf8f5;
   --destructive: #dc2626;
-  --border: #e2e5e9;
-  --input: #e2e5e9;
+  --border: #e5e0d8;
+  --input: #e5e0d8;
   --ring: #ff5c00;
   --chart-1: #ff5c00;
   --chart-2: #1a1a1a;
@@ -72,9 +72,9 @@
   --sidebar-foreground: #1a1a1a;
   --sidebar-primary: #ff5c00;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f3f4f6;
+  --sidebar-accent: #f0ebe3;
   --sidebar-accent-foreground: #1a1a1a;
-  --sidebar-border: #e2e5e9;
+  --sidebar-border: #e5e0d8;
   --sidebar-ring: #ff5c00;
 }
 
@@ -116,33 +116,6 @@
 
 .skip-link:focus {
   transform: translateY(0);
-}
-
-.portfolio-hero {
-  background: linear-gradient(120deg, #171717, #252525);
-  color: #ffffff;
-}
-
-.hero-action {
-  display: inline-flex;
-  min-height: 44px;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #a3a3a3;
-  color: #ffffff;
-  transition: background-color 160ms, color 160ms, border-color 160ms;
-}
-
-.hero-action:hover {
-  border-color: #ffffff;
-  background: #ffffff;
-  color: #171717;
-}
-
-.hero-action-primary {
-  border-color: #ff8a4c;
-  background: #ff8a4c;
-  color: #171717;
 }
 
 @keyframes float {

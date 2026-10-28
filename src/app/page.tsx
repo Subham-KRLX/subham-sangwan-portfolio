@@ -199,11 +199,11 @@ export default function Home() {
 
   return (
     <MotionConfig reducedMotion="user">
-    <div ref={containerRef} className="min-h-screen bg-background text-[#1a1a1a] overflow-x-hidden">
+    <div ref={containerRef} className="min-h-screen bg-[#faf8f5] text-[#1a1a1a] overflow-x-hidden">
       <a href="#main-content" className="skip-link">Skip to content</a>
       <div className="fixed inset-0 noise pointer-events-none z-50" />
 
-      <nav aria-label="Primary navigation" className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 bg-[#171717]/95 backdrop-blur-md">
+      <nav aria-label="Primary navigation" className="fixed top-0 left-0 right-0 z-40 mix-blend-difference">
         <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
           <motion.a
             href="#home"
@@ -267,7 +267,10 @@ export default function Home() {
       )}
 
       <main id="main-content" tabIndex={-1}>
-      <section id="home" className="portfolio-hero min-h-screen relative flex flex-col justify-between pt-32 pb-12">
+      <section id="home" className="min-h-screen relative flex flex-col justify-between pt-32 pb-12">
+        <div className="absolute top-20 right-12 w-[500px] h-[500px] bg-[#ff5c00] opacity-20 blur-[150px] rounded-full" />
+        <div className="absolute bottom-20 left-12 w-[400px] h-[400px] bg-[#1a1a1a] opacity-10 blur-[120px] rounded-full" />
+
         <div className="flex-1 flex items-center px-6 md:px-12">
           <div className="max-w-[1800px] min-w-0 mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -276,23 +279,23 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="min-w-0 max-w-full"
             >
-              <p className="text-sm font-mono text-[#c6c6c6] mb-4 tracking-widest uppercase">
+              <p className="text-sm font-mono text-[#6b6b6b] mb-4 tracking-widest uppercase">
                 Open to software and AI/ML internships
               </p>
               <h1 className="text-2xl min-[375px]:text-[2rem] sm:text-6xl md:text-7xl lg:text-[3rem] xl:text-[3.75rem] 2xl:text-[4.5rem] font-extrabold leading-[1.05] tracking-normal">
                 SUBHAM
                 <br />
-                <span className="text-stroke" style={{ WebkitTextStroke: "2px #e5e5e5" }}>SANGWAN</span>
+                <span className="text-stroke">SANGWAN</span>
               </h1>
 
               <div className="mt-8 flex items-center gap-4">
-                <div className="h-px bg-[#a3a3a3] w-16" />
+                <div className="h-px bg-[#1a1a1a] w-16" />
                 <motion.span
                   key={currentRole}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="text-xl font-medium text-[#ff9c66]"
+                  className="text-xl font-medium text-[#ff5c00]"
                 >
                   {roles[currentRole]}
                 </motion.span>
@@ -303,7 +306,7 @@ export default function Home() {
                   <a
                     key={platform.name}
                     href={platform.url}
-                    className={`hero-action px-3 sm:px-5 py-2.5 text-center text-sm font-bold uppercase tracking-normal ${platform.name === "Projects" ? "hero-action-primary" : ""}`}
+                    className="px-3 sm:px-5 py-2.5 border-2 border-[#1a1a1a] text-center text-sm font-bold uppercase tracking-normal hover:bg-[#1a1a1a] hover:text-white transition-all"
                   >
                     {platform.name}
                   </a>
@@ -311,7 +314,7 @@ export default function Home() {
                 <ResumeLink />
               </div>
 
-              <div className="mt-8 flex items-center gap-2 text-[#c6c6c6]">
+              <div className="mt-8 flex items-center gap-2 text-[#6b6b6b]">
                 <MapPin size={16} />
                 <span className="text-sm">Pilani, Rajasthan | Pune, Maharashtra</span>
               </div>
@@ -323,8 +326,14 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative hidden lg:block"
             >
-              <div aria-hidden="true" className="aspect-square max-w-[500px] ml-auto flex items-center justify-center">
-                <span className="text-[280px] font-extrabold text-white/15 select-none">S</span>
+              <div className="aspect-square max-w-[500px] ml-auto relative">
+                <div className="absolute inset-0 bg-[#ff5c00] animate-blob" />
+                <div className="absolute inset-4 bg-[#faf8f5] flex items-center justify-center animate-blob" style={{ animationDelay: "-4s" }}>
+                  <span className="text-[180px] font-extrabold text-[#1a1a1a]">S</span>
+                </div>
+                <div className="absolute -top-8 -right-8 w-24 h-24 bg-[#1a1a1a] rounded-full flex items-center justify-center animate-float">
+                  <ArrowUpRight className="text-white" size={32} />
+                </div>
               </div>
             </motion.div>
           </div>
@@ -362,7 +371,7 @@ export default function Home() {
             className="grid lg:grid-cols-2 gap-16 items-start"
           >
             <div>
-              <span className="text-sm font-mono text-[#c2410c] tracking-widest">01 — ABOUT</span>
+              <span className="text-sm font-mono text-[#ff5c00] tracking-widest">01 — ABOUT</span>
               <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 leading-tight">
                 BUILDING
                 <br />
@@ -433,7 +442,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-sm font-mono text-[#ff9c66] tracking-widest">02 — SKILLS</span>
+            <span className="text-sm font-mono text-[#ff5c00] tracking-widest">02 — SKILLS</span>
             <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 mb-16">
               TECH <span className="text-stroke" style={{ WebkitTextStroke: "2px white" }}>STACK</span>
             </h2>
@@ -446,7 +455,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  whileHover={{ y: -8, backgroundColor: "#9a3412" }}
+                  whileHover={{ y: -8, backgroundColor: "#ff5c00" }}
                   className="border border-white/20 p-6 text-center cursor-default transition-all group"
                 >
                   <span className="text-3xl font-bold text-white/20 group-hover:text-white transition-colors">
@@ -468,7 +477,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-sm font-mono text-[#c2410c] tracking-widest">03 — COMPETITIVE PROGRAMMING</span>
+            <span className="text-sm font-mono text-[#ff5c00] tracking-widest">03 — COMPETITIVE PROGRAMMING</span>
             <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 mb-8">
               1000+ <span className="text-stroke">PROBLEMS</span>
             </h2>
@@ -503,7 +512,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="opensource" className="py-32 px-6 md:px-12 bg-[#f3f4f6]">
+      <section id="opensource" className="py-32 px-6 md:px-12 bg-[#f0ebe3]">
         <div className="max-w-[1800px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -511,7 +520,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-sm font-mono text-[#c2410c] tracking-widest">04 — OPEN SOURCE</span>
+            <span className="text-sm font-mono text-[#ff5c00] tracking-widest">04 — OPEN SOURCE</span>
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mt-4 mb-16 break-words">
               MERGED PRS
             </h2>
@@ -568,7 +577,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-sm font-mono text-[#c2410c] tracking-widest">05 — PROJECTS</span>
+            <span className="text-sm font-mono text-[#ff5c00] tracking-widest">05 — PROJECTS</span>
             <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 mb-8">
               SELECTED <span className="text-stroke">WORK</span>
             </h2>
@@ -608,7 +617,7 @@ export default function Home() {
                         alt={project.name}
                         fill
                         sizes="(min-width: 768px) 50vw, 100vw"
-                        className={`${project.imageFit === "contain" ? "object-contain p-5 sm:p-8 bg-[#f3f4f6]" : "object-cover"} group-hover:scale-105 transition-transform duration-500`}
+                        className={`${project.imageFit === "contain" ? "object-contain p-5 sm:p-8 bg-[#f5f0e3]" : "object-cover"} group-hover:scale-105 transition-transform duration-500`}
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -676,7 +685,7 @@ export default function Home() {
           >
             <div className="grid lg:grid-cols-2 gap-16">
               <div>
-                <span className="text-sm font-mono text-[#ff9c66] tracking-widest">06 — CONTACT</span>
+                <span className="text-sm font-mono text-[#ff5c00] tracking-widest">06 — CONTACT</span>
                 <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mt-4 leading-tight">
                   LET&apos;S WORK
                   <br />
@@ -751,7 +760,7 @@ export default function Home() {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full h-14 bg-[#c2410c] hover:bg-[#9a3412] text-white font-bold uppercase tracking-wider"
+                  className="w-full h-14 bg-[#ff5c00] hover:bg-[#e55200] text-white font-bold uppercase tracking-wider"
                 >
                   <Send size={18} className="mr-2" />
                   Create Email Draft
@@ -763,9 +772,9 @@ export default function Home() {
       </section>
 
       </main>
-      <footer className="py-12 px-6 md:px-12 border-t border-white/15 bg-[#1a1a1a] text-white">
+      <footer className="py-12 px-6 md:px-12 border-t border-[#e5e0d8]">
         <div className="max-w-[1800px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-sm text-white/70">
+          <p className="text-sm text-[#6b6b6b]">
             © {new Date().getFullYear()} Subham Sangwan — Open Source
           </p>
           <div className="flex items-center gap-4">
@@ -780,7 +789,7 @@ export default function Home() {
                 aria-label={label}
                 target={url.startsWith("http") ? "_blank" : undefined}
                 rel={url.startsWith("http") ? "noreferrer" : undefined}
-                className="w-12 h-12 border-2 border-white/40 flex items-center justify-center hover:bg-white hover:text-[#1a1a1a] transition-all"
+                className="w-12 h-12 border-2 border-[#1a1a1a] flex items-center justify-center hover:bg-[#1a1a1a] hover:text-white transition-all"
               >
                 <Icon size={18} />
               </a>
