@@ -86,6 +86,7 @@ const projects = [
   },
   {
     name: "Porsche Premium Car Experience",
+    caseStudy: "/projects/porsche-911-studio",
     category: "Web",
     description: "Next.js vehicle showcase with a 911 configurator for paint, wheels and trim, a configuration summary, and My Garage builds saved on the same device.",
     tags: ["Next.js", "TypeScript", "GSAP"],
@@ -655,7 +656,7 @@ export default function Home() {
                   <div className="mt-4">
                     <p className="text-[#6b6b6b]">{project.description}</p>
                     {project.caseStudy && (
-                      <Link href={project.caseStudy} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-bold underline underline-offset-4">
+                      <Link href={project.caseStudy} aria-label={`Read ${project.name} case study`} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-bold underline underline-offset-4">
                         View case study <ArrowUpRight size={16} aria-hidden="true" />
                       </Link>
                     )}

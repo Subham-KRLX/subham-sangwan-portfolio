@@ -13,5 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: "https://subham-sangwan-portfolio-kappa.vercel.app/projects/porsche-911-studio",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 }
