@@ -1,7 +1,6 @@
 <div align="center">
 
 # Subham Sangwan — Portfolio
-
 [![Live Demo](https://img.shields.io/badge/Live-Demo-ff5c00?style=for-the-badge&logo=vercel&logoColor=white)](https://subham-sangwan-portfolio-kappa.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-Subham--KRLX-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Subham-KRLX)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Subham%20Sangwan-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/subham-sangwan-592a0a316/)
