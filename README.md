@@ -1,12 +1,11 @@
 <div align="center">
-
+  
 # Subham Sangwan — Portfolio
 [![Live Demo](https://img.shields.io/badge/Live-Demo-ff5c00?style=for-the-badge&logo=vercel&logoColor=white)](https://subham-sangwan-portfolio-kappa.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-Subham--KRLX-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Subham-KRLX)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Subham%20Sangwan-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/subham-sangwan-592a0a316/)
 
 <br />
-
 <img src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/02253137-82ae-4624-a930-8d5ded9c6481/Screenshot-2026-01-15-at-7.27.26-PM-resized-1768485482959.webp?width=8000&height=8000&resize=contain" alt="Portfolio Hero Section" width="100%" />
 
 <br />
